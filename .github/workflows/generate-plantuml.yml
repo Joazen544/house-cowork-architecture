@@ -27,6 +27,9 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y plantuml
 
+      - name: Check PlantUML version
+        run: plantuml -version
+
       - name: Generate diagrams from .puml files as SVG
         run: |
           find . -name '*.puml' -exec plantuml -tsvg {} \;
