@@ -1,4 +1,4 @@
-@startuml tables
+@startuml database-structure
 
 entity User {
   *id: number <<generated>>
