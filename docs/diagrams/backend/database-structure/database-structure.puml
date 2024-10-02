@@ -1,4 +1,4 @@
-@startuml tables
+@startuml database-structure
 
 entity User {
   *id: number <<generated>>
@@ -40,7 +40,7 @@ entity TaskAssignment {
   *id: number <<generated>>
   *taskId: number <<FK(Task.id)>>
   *userId: number <<FK(User.id)>>
-  @assigneeStatus: number <<enum TaskAssignmentStatus>>
+  *assigneeStatus: number <<enum TaskAssignmentStatus>>
 }
 
 enum TaskAssignmentStatus {
@@ -98,7 +98,7 @@ JoinRequest -- JoinRequestStatus : uses
 
 entity Invitation {
   *id: number <<generated>>
-  *invitation_code:
+  *invitationCode: string
   *houseId: number <<FK(House.id)>>
   *expiresAt: datetime
 }
