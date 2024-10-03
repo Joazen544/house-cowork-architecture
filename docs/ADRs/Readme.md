@@ -5,10 +5,10 @@
 每個 ADR 檔案應該依照以下格式命名：
 
 ```
-<序號>-<Status縮寫>-<標題>.md
+<日期>_<序號>-<Status縮寫>-<標題>.md
 ```
 
-例如：`0001-AC-adr-tools-selection.md`
+例如：`20241002_1-AC-invitation-code-length-and-type.md`
 
 ### 常見的 Status 及其縮寫
 
