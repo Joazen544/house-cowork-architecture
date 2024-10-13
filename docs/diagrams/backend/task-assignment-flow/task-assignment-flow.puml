@@ -1,0 +1,61 @@
+@startuml task-assignment-flow
+  start
+    : User created a task;
+    if (Is the task assigned to a user at creation?) then (no)
+        : Task creation ends for now;
+        : Task status set as Open;
+        stop
+    else (yes)
+      if (Is the task assigned to more than one user?) then (yes)
+          : Notify the assignees (e.g., 3 assignees);
+          : Three pending assignments are created;
+          repeat
+            if (one assignee accepts the task?) then (accepted)
+              : One assignment status is set to Accepted;
+              : Task status is set to InProgress;
+              : Other assignment statuses are set to Blocked;
+              if (assignee completes the task?) then (yes)
+                : Assignment status is set to completed;
+                #palegreen: Task status is set to completed;
+                : notify the assigner;
+              else (no)
+                : Task status stays as InProgress;
+              endif
+            else if (one assignee rejects the task?) then (rejected)
+              : One assignment status is set to Rejected;
+              : the task status stays as Open;
+            elseif (All assignees reject the task?) then (rejected)
+              : All assignment statuses are set to Rejected;
+              #red: Task status is set to Rejected;
+              : notify the assigner;
+            else (All assignees stay Pending?)
+              : Task status stays as Open;
+            endif
+          repeat while (assignee changes mind?) is (yes) not (no)
+          stop
+      else (no)
+          : A pending assignment is created;
+          : Notify the assignee;
+          repeat
+            if (assignee accepts the task?) then (accepted)
+              : Assignment status is set to accepted;
+              : Task status is set to InProgress;
+              if (assignee completes the task?) then (yes)
+                : Assignment status is set to completed;
+                #palegreen: Task status is set to completed;
+                : notify the assigner;
+              else (no)
+                : Task status stays as InProgress;
+              endif
+            (no) else if (assignee rejects the task?) then (rejected)
+              : Assignment status is set to rejected;
+              #red: Task status is set to rejected;
+              : notify the assigner;
+            else (assignee does nothing?)
+              : Task status stays as open;
+            endif
+          repeat while (assignee changes mind?) is (yes) not (no)
+          stop
+      endif
+    endif
+@enduml
