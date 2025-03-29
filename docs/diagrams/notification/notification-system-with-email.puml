@@ -1,21 +1,16 @@
 @startuml notification-system-with-email
 
 package "Notification Module" {
-    [NotificationModule] --> [EmailModule]
+  [NotificationService]
 }
 
 package "Email Module" {
-    [email-service]
-    [send-email-service]
-    [email-template-repository]
-    [email-notification-repository]
-
-    [EmailModule] -down-> [email-service]
-    [EmailModule] -down-> [send-email-service]
-    [email-service] --> [email-template-repository]
-    [email-service] --> [email-notification-repository]
-    [send-email-service] --> [email-notification-repository]
-    [send-email-service] --> [email-template-repository]
+  [EmailService] --> [EmailTemplatesRepository]
+  [EmailService] --> [EmailNotificationsRepository]
+  [SendEmailService] --> [EmailTemplatesRepository]
+  [SendEmailService] --> [EmailNotificationsRepository]
 }
 
+[NotificationService] --> [EmailService]
+[NotificationService] --> [SendEmailService]
 @enduml
