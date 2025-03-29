@@ -5,6 +5,19 @@ package "Notification Module" {
 }
 
 package "Email Module" {
+  [EmailService]
+  note right of [EmailService]
+    + createNotification()
+  end note
+
+  [SendEmailService]
+  note right of [SendEmailService]
+    + sendEmail()
+  end note
+
+  [EmailTemplatesRepository]
+  [EmailNotificationsRepository]
+
   [EmailService] --> [EmailTemplatesRepository]
   [EmailService] --> [EmailNotificationsRepository]
   [SendEmailService] --> [EmailTemplatesRepository]
