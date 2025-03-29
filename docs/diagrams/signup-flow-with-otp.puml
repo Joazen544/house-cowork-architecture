@@ -1,0 +1,26 @@
+@startuml
+start
+:User input email;
+:User click 'verify email';
+:Backend check if email was registered;
+if (Email was registered) then (Yes)
+    :Show error message;
+    end
+else (No)
+    :Backend record the email with a token with ttl;
+    :Send email with token in deeplink to user;
+    :User click the link;
+    :User redirect to signup page to input password and other info;
+    :User submit the form, APP will include the token in the form;
+    :Backend check if the token is valid;
+    if (Token is valid) then (Yes)
+        :Backend create user;
+        :Backend send welcome email;
+        :User signup successfully, redirect to home page;
+        stop
+    else (No)
+        :Show error message;
+        :User need to verify email again;
+        end
+    endif
+@enduml
